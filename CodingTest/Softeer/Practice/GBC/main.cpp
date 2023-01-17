@@ -9,29 +9,56 @@
 
 using namespace std;
 
-int N, M;
-int limit[100][2], operation[100][2];
+int N, M, limit[100], operation[100];
 
 void Input_NM()
 {
     cin >> N >> M;
 }
 
-void Input_arr(int arr[][2], const int n)
+void Input_Array(int *arr, int n)
 {
+    int length, velocity, index = 0;
+
     for (int i = 0; i < n; i++) {
-        cin >> arr[i][0] >> arr[i][1];
+        cin >> length >> velocity;
+        for (int j = 0; j < length; j++) {
+            arr[index] = velocity;
+            index++;
+        }
     }
 }
 
-void Solution()
+void Calculate(int *max)
 {
+    *max = 0;
+    for (int i = 0; i < 100; i++) {
+        if (*max < operation[i] - limit[i]) {
+            *max = operation[i] - limit[i];
+        }
+    }
+}
+
+void Output(int *max)
+{
+    cout << *max << endl;
+}
+
+void Solution()
+{   
     Input_NM();
-    Input_arr(limit, N);
-    Input_arr(operation, M);
+    Input_Array(limit, N);
+    Input_Array(operation, M);
+
+    int max;
+    Calculate(&max);
+
+    Output(&max);
 }
 
 int main(void)
 {
+    Solution();
 
+    return 0;
 }
